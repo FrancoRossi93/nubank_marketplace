@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nubank_marketplace/core/failures.dart';
 import 'package:nubank_marketplace/core/usecases/usecase.dart';
-import 'package:nubank_marketplace/features/init_settings/domain/entities/api_data.dart';
-import 'package:nubank_marketplace/features/init_settings/domain/repository/init_settings_repository.dart';
+import 'package:nubank_marketplace/features/api_data/domain/entities/api_data.dart';
+import 'package:nubank_marketplace/features/api_data/domain/repository/init_settings_repository.dart';
 
 class GetApiData implements UseCase<ApiData, NoParams> {
   final InitSettingsRepository repository;

@@ -1,4 +1,4 @@
-import 'package:nubank_marketplace/features/init_settings/domain/entities/api_data.dart';
+import 'package:nubank_marketplace/features/api_data/domain/entities/api_data.dart';
 import 'package:nubank_marketplace/features/offers/data/models/product_offer_model.dart';
 import 'package:nubank_marketplace/features/offers/domain/entities/product_offer.dart';
 import 'package:nubank_marketplace/features/user/data/models/user_model.dart';
