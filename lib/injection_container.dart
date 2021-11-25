@@ -9,6 +9,7 @@ import 'package:nubank_marketplace/features/offers/data/repositories/offers_repo
 import 'package:nubank_marketplace/features/offers/domain/repository/offers_repository.dart';
 import 'package:nubank_marketplace/features/offers/domain/usecases/get_offers.dart';
 import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
+import 'package:nubank_marketplace/features/user/data/datasources/user_local_data_source.dart';
 import 'package:nubank_marketplace/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:nubank_marketplace/features/user/data/repositories/user_repository_impl.dart';
 import 'package:nubank_marketplace/features/user/domain/repository/user_repository.dart';
@@ -45,6 +46,8 @@ void initFeatures() {
   sl.registerLazySingleton(() => GetOffers(sl()));
 
   // Datasources
+  sl.registerLazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSourceImpl(sl()));
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(sl(), sl()));
   sl.registerLazySingleton<OffersRemoteDataSource>(

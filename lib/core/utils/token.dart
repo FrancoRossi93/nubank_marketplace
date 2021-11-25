@@ -8,11 +8,11 @@ class TokenHelper {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     if (sharedPreferences.containsKey(CACHED_TOKEN)) {
-      if (JwtDecoder.isExpired(sharedPreferences.getString(CACHED_TOKEN))) {
+      /*  if (JwtDecoder.isExpired(sharedPreferences.getString(CACHED_TOKEN))) {
         throw CacheExcepction(errorCode: 1);
-      } else {
-        return sharedPreferences.getString(CACHED_TOKEN);
-      }
+      } else { */
+      return sharedPreferences.getString(CACHED_TOKEN);
+      /* } */
     } else {
       throw CacheExcepction(errorCode: 0);
     }
