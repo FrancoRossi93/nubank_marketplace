@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
 import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
 import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
 import 'package:nubank_marketplace/router.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserBloc>(
             create: (context) => sl<UserBloc>()..add(GetUserEvent())),
         BlocProvider<OffersBloc>(
-            create: (context) => sl<OffersBloc>()..add(GetOffersEvent()))
+            create: (context) => sl<OffersBloc>()..add(GetOffersEvent())),
+        BlocProvider<CartBloc>(create: (context) => sl<CartBloc>())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:nubank_marketplace/core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:nubank_marketplace/core/utils/token.dart';
+import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
 import 'package:nubank_marketplace/features/offers/data/datasources/offers_remote_data_source.dart';
 import 'package:nubank_marketplace/features/offers/data/repositories/offers_repository_impl.dart';
 import 'package:nubank_marketplace/features/offers/domain/repository/offers_repository.dart';
@@ -37,6 +38,7 @@ void initFeatures() {
   //!Blocs
   sl.registerLazySingleton(() => UserBloc(sl()));
   sl.registerLazySingleton(() => OffersBloc(sl()));
+  sl.registerLazySingleton(() => CartBloc());
 
   // Usercases
   sl.registerLazySingleton(() => GetUser(sl()));
