@@ -28,8 +28,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            primaryColor: const Color(0xFFa332b3),
+            primaryColorLight: const Color(0xFFd765e6),
+            primaryColorDark: const Color(0xFF710083),
+            appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF710083)),
+            buttonTheme: const ButtonThemeData(
+                buttonColor: Color(0xFF710083),
+                textTheme: ButtonTextTheme.normal),
+            textTheme: const TextTheme(
+                bodyText1: TextStyle(color: Color(0xffffffff)))),
         onGenerateRoute: NubankMarketplaceRouter.generateRoute,
       ),
     );
