@@ -16,6 +16,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       final failureOrUser = await getUser(getUserUseCase.NoParams());
       yield failureOrUser.fold(
           (l) => UserError(l?.message), (r) => UserLoaded(r));
+    } else if (event is UpdateUserBalanceEvent) {
+      yield UserLoading();
+      event.user.balance -= event.totalPurchased;
+      yield UserLoaded(event.user);
     }
   }
 }
