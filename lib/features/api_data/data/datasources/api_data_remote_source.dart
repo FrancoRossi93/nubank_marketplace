@@ -23,13 +23,22 @@ class ApiDataRemoteSourceImpl implements ApiDataRemoteSource {
   @override
   Future<ApiData> getApiData() async {
     try {
-      final token = await tokenHelper.getCachedToken();
-      final query = json.encode(
-          "query{viewer{id name balance offers {id,price,product {id,name,description,image}}}");
-      final response = await client.get(
-          Uri.parse(
-              'https://staging-nu-needful-things.nubank.com.br/graphql?query=$query'),
-          headers: {"Authorization": "Bearer $token"});
+      /* final token = await tokenHelper.getCachedToken(); */
+      final query = json.encode({
+        "query":
+            "{viewer{id name balance offers {id,price,product {id,name,description,image}}}}",
+        "operationName": null,
+        "variables": null
+      });
+
+      final response = await client.post(
+          Uri.parse('https://staging-nu-needful-things.nubank.com.br/query'),
+          body: query,
+          headers: {
+            "Authorization":
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhd2Vzb21lY3VzdG9tZXJAZ21haWwuY29tIn0.cGT2KqtmT8KNIJhyww3T8fAzUsCD5_vxuHl5WbXtp8c",
+            "Content-Type": "application/json"
+          });
       if (response.statusCode == 200) {
         final result =
             ApiDataModel.fromJson(json.decode(response.body)["data"]["viewer"]);
