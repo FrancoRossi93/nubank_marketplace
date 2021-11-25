@@ -29,8 +29,8 @@ Future<void> init() async {
 
 void initFeatures() {
   //!Repositories
-  sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
+      remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<OffersRepository>(
       () => OffersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 

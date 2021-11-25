@@ -1,10 +1,7 @@
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:nubank_marketplace/core/exceptions.dart';
+import 'package:nubank_marketplace/features/user/data/datasources/user_local_data_source.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-const CACHED_USER = "CACHED_USER";
-const CACHED_TOKEN = "TOKEN";
-const CACHED_REFRESH_TOKEN = "REFRESH_TOKEN";
 
 class TokenHelper {
   Future<String> getCachedToken() async {
