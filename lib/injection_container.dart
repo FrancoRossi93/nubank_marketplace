@@ -3,11 +3,17 @@ import 'package:get_it/get_it.dart';
 import 'package:nubank_marketplace/core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:nubank_marketplace/core/utils/token.dart';
-import 'package:nubank_marketplace/features/api_data/data/datasources/api_data_remote_source.dart';
-import 'package:nubank_marketplace/features/api_data/data/repositories/api_data_repository_impl.dart';
-import 'package:nubank_marketplace/features/api_data/domain/repository/api_data_repository.dart';
-import 'package:nubank_marketplace/features/api_data/domain/usecases/get_api_data.dart';
-import 'package:nubank_marketplace/features/api_data/presentation/bloc/api_data_bloc.dart';
+import 'package:nubank_marketplace/features/offers/data/datasources/offers_remote_data_source.dart';
+import 'package:nubank_marketplace/features/offers/data/repositories/offers_repository_impl.dart';
+import 'package:nubank_marketplace/features/offers/domain/repository/offers_repository.dart';
+import 'package:nubank_marketplace/features/offers/domain/usecases/get_offers.dart';
+import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
+import 'package:nubank_marketplace/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:nubank_marketplace/features/user/data/repositories/user_repository_impl.dart';
+import 'package:nubank_marketplace/features/user/domain/repository/user_repository.dart';
+import 'package:nubank_marketplace/features/user/domain/usecases/get_user.dart';
+import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -23,15 +29,24 @@ Future<void> init() async {
 
 void initFeatures() {
   //!Repositories
-  sl.registerLazySingleton<ApiDataRepository>(
-      () => ApiDataRepositoryImpl(remoteSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<OffersRepository>(
+      () => OffersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+
   //!Blocs
-  sl.registerLazySingleton(() => ApiDataBloc(sl()));
+  sl.registerLazySingleton(() => UserBloc(sl()));
+  sl.registerLazySingleton(() => OffersBloc(sl()));
+
   // Usercases
-  sl.registerLazySingleton(() => GetApiData(sl()));
+  sl.registerLazySingleton(() => GetUser(sl()));
+  sl.registerLazySingleton(() => GetOffers(sl()));
+
   // Datasources
-  sl.registerLazySingleton<ApiDataRemoteSource>(
-      () => ApiDataRemoteSourceImpl(client: sl(), tokenHelper: sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<OffersRemoteDataSource>(
+      () => OffersRemoteDataSourceImpl(sl(), sl()));
 }
 
 void initCore() {

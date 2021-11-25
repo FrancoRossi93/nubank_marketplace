@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nubank_marketplace/features/api_data/presentation/bloc/api_data_bloc.dart';
+import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
+import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
 import 'injection_container.dart' as di;
 import 'injection_container.dart';
 
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ApiDataBloc>(create: (context) => sl<ApiDataBloc>())
+        BlocProvider<UserBloc>(
+            create: (context) => sl<UserBloc>()..add(GetUserEvent())),
+        BlocProvider<OffersBloc>(
+            create: (context) => sl<OffersBloc>()..add(GetOffersEvent()))
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -63,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      BlocProvider.of<ApiDataBloc>(context)..add(GetApiDataEvent());
       _counter++;
     });
   }
