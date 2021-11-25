@@ -26,6 +26,17 @@ class HomePage extends StatelessWidget {
             builder: (context, offersState) => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Flash offers!',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    )
+                  ],
+                ),
                 if (offersState is OffersLoaded)
                   ...offersState.offers.map((e) => OfferTile(
                         offer: e,
@@ -35,6 +46,10 @@ class HomePage extends StatelessWidget {
           ),
         ),
       )),
+      floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Theme.of(context).primaryColorDark,
+          onPressed: () {},
+          label: Icon(Icons.shop)),
     );
   }
 }

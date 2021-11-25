@@ -36,7 +36,15 @@ class MyApp extends StatelessWidget {
                 buttonColor: Color(0xFF710083),
                 textTheme: ButtonTextTheme.normal),
             textTheme: const TextTheme(
-                bodyText1: TextStyle(color: Color(0xffffffff)))),
+                bodyText1:
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                headline4: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+                headline5: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                headline6:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.w400))),
         onGenerateRoute: NubankMarketplaceRouter.generateRoute,
       ),
     );

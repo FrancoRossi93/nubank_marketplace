@@ -28,8 +28,11 @@ class OfferTile extends StatelessWidget {
                       image: NetworkImage(offer.product.imageUrl),
                       fit: BoxFit.fill)),
             ),
-            title: Text(offer.product.name),
-            subtitle: Text(offer.price.toString()),
+            title: Text(offer.product.name,
+                style: Theme.of(context).textTheme.headline5),
+            subtitle: Text(offer.price.toString(),
+                style: Theme.of(context).textTheme.headline6),
+            collapsedIconColor: Theme.of(context).primaryColor,
             childrenPadding: const EdgeInsets.all(20),
             children: [
               Column(
@@ -38,7 +41,11 @@ class OfferTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Text(offer.product.description))
+                      Expanded(
+                          child: Text(
+                        offer.product.description,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ))
                     ],
                   ),
                   const SizedBox(
