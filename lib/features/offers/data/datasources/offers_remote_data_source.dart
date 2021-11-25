@@ -43,7 +43,7 @@ class OffersRemoteDataSourceImpl implements OffersRemoteDataSource {
         return offers;
       }
     } catch (e) {
-      throw ServerException(message: e);
+      throw ServerException(message: 'Error en el servidor');
     }
   }
 }
