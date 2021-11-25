@@ -9,7 +9,7 @@ class ProductOfferModel extends ProductOffer {
   factory ProductOfferModel.fromJson(Map<String, dynamic> json) =>
       ProductOfferModel(
           id: json['id'],
-          price: json['price'] != null ? int.tryParse(json['price']) : 0,
+          price: json['price'] != null ? (json['price'] as num).toInt() : 0,
           product: json['product'] != null
               ? ProductModel.fromJson(json['product'])
               : null);

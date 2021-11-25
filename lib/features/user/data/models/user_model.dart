@@ -7,5 +7,5 @@ class UserModel extends User {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
-      balance: json['balance'] != null ? int.tryParse(json['balance']) : 0);
+      balance: json['balance'] != null ? (json['balance'] as num).toInt() : 0);
 }
