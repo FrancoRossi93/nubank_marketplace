@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nubank_marketplace/core/utils/custom_icons.dart';
 import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
+import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
 import 'package:nubank_marketplace/features/cart/cart_bottom_modal.dart';
 import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
 import 'package:nubank_marketplace/features/offers/presentation/widgets/offer_tile.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = '/splasg-page';
+  static const routeName = '/home-page';
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,41 @@ class HomePage extends StatelessWidget {
             color: Colors.white,
           ),
           title: const Text('marketplace'),
+          actions: [
+            BlocBuilder<UserBloc, UserState>(builder: (context, userState) {
+              if (userState is UserLoaded) {
+                return BlocListener<CartBloc, CartState>(
+                  listener: (context, cartState) {
+                    if (cartState is CartLoaded &&
+                        cartState.totalPurchased != null) {
+                      BlocProvider.of<UserBloc>(context)
+                        ..add(UpdateUserBalanceEvent(
+                            userState.user, cartState.totalPurchased));
+                    }
+                  },
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('Jerry Smith'),
+                        PopupMenuButton(
+                          icon: Icon(Icons.attach_money_outlined),
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem<String>(
+                                child: Text(
+                                    'Balance: \$${userState.user.balance.toString()}'),
+                              ),
+                            ];
+                          },
+                        )
+                      ]),
+                );
+              } else {
+                return Container();
+              }
+            })
+          ],
         ),
         body: SingleChildScrollView(
             child: Center(
