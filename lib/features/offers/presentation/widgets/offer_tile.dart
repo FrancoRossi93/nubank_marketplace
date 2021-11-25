@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
 import 'package:nubank_marketplace/features/offers/domain/entities/product_offer.dart';
 
 class OfferTile extends StatelessWidget {
@@ -54,14 +56,25 @@ class OfferTile extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: MaterialButton(
-                          onPressed: () {},
-                          textColor: Colors.white,
-                          textTheme: Theme.of(context).buttonTheme.textTheme,
-                          color: Theme.of(context).primaryColor,
-                          child: const Text(
-                            'Agregar',
-                          ),
+                        child: BlocBuilder<CartBloc, CartState>(
+                          builder: (context, cartState) {
+                            return MaterialButton(
+                              onPressed: () =>
+                                  BlocProvider.of<CartBloc>(context)
+                                    ..add(AddOfferToCartEvent(
+                                        initialCart: cartState is CartLoaded
+                                            ? cartState.cartOffers
+                                            : [],
+                                        offer: offer)),
+                              textColor: Colors.white,
+                              textTheme:
+                                  Theme.of(context).buttonTheme.textTheme,
+                              color: Theme.of(context).primaryColor,
+                              child: const Text(
+                                'Agregar',
+                              ),
+                            );
+                          },
                         ),
                       )
                     ],
