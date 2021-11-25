@@ -25,7 +25,7 @@ class ApiDataRemoteSourceImpl implements ApiDataRemoteSource {
     try {
       final token = await tokenHelper.getCachedToken();
       final query = json.encode(
-          "query{viewer{idnamebalanceoffers {id,price,product {id,name,description,image}}}");
+          "query{viewer{id name balance offers {id,price,product {id,name,description,image}}}");
       final response = await client.get(
           Uri.parse(
               'https://staging-nu-needful-things.nubank.com.br/graphql?query=$query'),
