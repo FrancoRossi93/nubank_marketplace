@@ -15,7 +15,10 @@ class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
   final List<ProductOffer> cartOffers;
-  CartLoaded({this.cartOffers});
+  final int totalPurchased;
+  CartLoaded({@required this.cartOffers, this.totalPurchased});
 }
 
 class CartError extends CartState {}
+
+class CartPurchase extends CartState {}

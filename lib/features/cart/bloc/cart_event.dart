@@ -18,3 +18,8 @@ class RemoveOfferFromCartEvent extends CartEvent {
   final ProductOffer offer;
   RemoveOfferFromCartEvent({this.initialCart, this.offer});
 }
+
+class CartPurchaseEvent extends CartEvent {
+  final int totalAmountPurchase;
+  CartPurchaseEvent(this.totalAmountPurchase);
+}
