@@ -70,7 +70,7 @@ class CartBottomModal extends StatelessWidget {
                     ],
                   ),
                 )
-              : Text('No offers have been added.'),
+              : const Text('No offers have been added.'),
         ),
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: Row(

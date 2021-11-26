@@ -77,10 +77,15 @@ class HomePage extends StatelessWidget {
                       )
                     ],
                   ),
-                  if (offersState is OffersLoaded)
+                  if (offersState is OffersLoaded &&
+                      offersState.offers.isNotEmpty)
                     ...offersState.offers.map((e) => OfferTile(
                           offer: e,
                         ))
+                  else if (offersState is OffersError)
+                    Text(offersState.errorMessage)
+                  else
+                    const Text('We could not find any offer for you.')
                 ],
               ),
             ),

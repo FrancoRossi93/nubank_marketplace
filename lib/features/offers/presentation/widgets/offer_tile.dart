@@ -30,9 +30,10 @@ class OfferTile extends StatelessWidget {
                       image: NetworkImage(offer.product.imageUrl),
                       fit: BoxFit.fill)),
             ),
-            title: Text(offer.product.name,
+            title: Text("${offer.product.name} \n\$${offer.price}",
                 style: Theme.of(context).textTheme.headline5),
-            subtitle: Text(offer.price.toString(),
+            subtitle: Text(
+                "Until ${offer.expirationDate.toString().substring(0, 10)}",
                 style: Theme.of(context).textTheme.headline6),
             collapsedIconColor: Theme.of(context).primaryColor,
             childrenPadding: const EdgeInsets.all(20),
