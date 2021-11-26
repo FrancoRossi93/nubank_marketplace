@@ -44,60 +44,59 @@ void main() {
       });
       body();
     });
+  }
 
-    group('getOffers', () {
-      final List<ProductOfferModel> tProductOffer = [
-        ProductOfferModel(
-            id: "1",
-            price: 100,
-            product: ProductModel(
-                id: "1", name: "test", description: "test", imageUrl: "test"))
-      ];
-      test('should check if device is online', () async {
+  group('getOffers', () {
+    final List<ProductOfferModel> tProductOffer = [
+      ProductOfferModel(
+          id: "1",
+          price: 100,
+          product: ProductModel(
+              id: "1", name: "test", description: "test", imageUrl: "test"))
+    ];
+    test('should check if device is online', () async {
+      //arrange
+      when(networkInfo.isConnected).thenAnswer((realInvocation) async => true);
+      //act
+      repositoryImpl.getOffers();
+      //assert
+      verify(networkInfo.isConnected);
+    });
+    runTestsOnline(() {
+      test(
+          'should return a remote data when the call to remote data source is successfull',
+          () async {
         //arrange
-        when(networkInfo.isConnected)
-            .thenAnswer((realInvocation) async => true);
+        when(remoteDataSource.getOffers())
+            .thenAnswer((realInvocation) async => tProductOffer);
         //act
-        repositoryImpl.getOffers();
+        final result = await repositoryImpl.getOffers();
         //assert
-        verify(networkInfo.isConnected);
+        verify(remoteDataSource.getOffers());
+        expect(result, equals(Right(tProductOffer)));
       });
-      runTestsOnline(() {
-        test(
-            'should return a remote data when the call to remote data source is successfull',
-            () async {
-          //arrange
-          when(remoteDataSource.getOffers())
-              .thenAnswer((realInvocation) async => tProductOffer);
-          //act
-          final result = await repositoryImpl.getOffers();
-          //assert
-          verify(remoteDataSource.getOffers());
-          expect(result, equals(Right(tProductOffer)));
-        });
 
-        test(
-            'should return a server failure when the call to remote data source fails',
-            () async {
-          //arrange
-          when(remoteDataSource.getOffers())
-              .thenThrow(ServerException(message: ""));
-          //act
-          final result = await repositoryImpl.getOffers();
-          //assert
-          verify(remoteDataSource.getOffers());
-          expect(result, equals(Left(ServerFailure(message: ""))));
-        });
-      });
-      runTestsOffline(() {
-        test('should return ConnectionFailure if no connetion data is found',
-            () async {
-          //act
-          final result = await repositoryImpl.getOffers();
-          //assert
-          expect(result, equals(Left(ConnectionFailure(message: ""))));
-        });
+      test(
+          'should return a server failure when the call to remote data source fails',
+          () async {
+        //arrange
+        when(remoteDataSource.getOffers())
+            .thenThrow(ServerException(message: ""));
+        //act
+        final result = await repositoryImpl.getOffers();
+        //assert
+        verify(remoteDataSource.getOffers());
+        expect(result, equals(Left(ServerFailure(message: ""))));
       });
     });
-  }
+    runTestsOffline(() {
+      test('should return ConnectionFailure if no connetion data is found',
+          () async {
+        //act
+        final result = await repositoryImpl.getOffers();
+        //assert
+        expect(result, equals(Left(ConnectionFailure(message: ""))));
+      });
+    });
+  });
 }

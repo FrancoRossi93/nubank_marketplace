@@ -26,8 +26,6 @@ void main() {
       //assert
       verifyNever(mockDataConnectionChecker.hasConnection);
       expect(result, tHasConnectionFuture);
-
-      verifyNoMoreInteractions(mockDataConnectionChecker);
     });
   });
 }

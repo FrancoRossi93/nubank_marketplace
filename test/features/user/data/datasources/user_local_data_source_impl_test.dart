@@ -15,7 +15,8 @@ void main() {
   });
 
   group('cache user token', () {
-    final tUserToken = "token";
+    final tUserToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhd2Vzb21lY3VzdG9tZXJAZ21haWwuY29tIn0.cGT2KqtmT8KNIJhyww3T8fAzUsCD5_vxuHl5WbXtp8c";
 
     test('should store the token on shared preferences', () {
       //act
