@@ -72,7 +72,7 @@ class OfferTile extends StatelessWidget {
                                   Theme.of(context).buttonTheme.textTheme,
                               color: Theme.of(context).primaryColor,
                               child: const Text(
-                                'Agregar',
+                                'Add',
                               ),
                             );
                           },

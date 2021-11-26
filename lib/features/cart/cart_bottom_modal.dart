@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
-import 'package:nubank_marketplace/features/cart/widgets/snack_bar_error.dart';
+import 'package:nubank_marketplace/features/cart/widgets/snack_bar_handlers.dart';
 import 'package:nubank_marketplace/features/offers/domain/entities/product_offer.dart';
 import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
 
@@ -99,6 +99,9 @@ class CartBottomModal extends StatelessWidget {
                               BlocProvider.of<CartBloc>(context)
                                 ..add(CartPurchaseEvent(totalValue));
                               Navigator.of(context).pop();
+                              SnackBarSuccess.buildSuccessSnackBar(context,
+                                  successMessage:
+                                      'Your purchase has been made successfully');
                             } else {
                               offersExpired.forEach((element) {
                                 SnackBarError.buildErrorSnackBar(context,
