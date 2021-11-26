@@ -22,7 +22,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<User> getUser() async {
     try {
-      final token = await tokenHelper.getCachedToken();
+      final token =  await tokenHelper.getCachedToken();
       final query = json.encode({
         "query": "{viewer{id name balance}}",
         "operationName": null,
