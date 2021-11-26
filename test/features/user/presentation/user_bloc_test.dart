@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:nubank_marketplace/core/exceptions.dart';
 import 'package:nubank_marketplace/core/failures.dart';
 import 'package:nubank_marketplace/features/user/data/models/user_model.dart';
 import 'package:nubank_marketplace/features/user/domain/usecases/get_user.dart'

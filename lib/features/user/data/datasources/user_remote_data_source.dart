@@ -43,7 +43,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         throw ServerException(message: 'Something went wrong');
       }
     } catch (e) {
-      throw ServerException(message: 'Error en el servidor');
+      throw ServerException(message: 'Server Error');
     }
   }
 }
