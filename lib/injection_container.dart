@@ -3,11 +3,13 @@ import 'package:get_it/get_it.dart';
 import 'package:nubank_marketplace/core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:nubank_marketplace/core/utils/token.dart';
+import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
 import 'package:nubank_marketplace/features/offers/data/datasources/offers_remote_data_source.dart';
 import 'package:nubank_marketplace/features/offers/data/repositories/offers_repository_impl.dart';
 import 'package:nubank_marketplace/features/offers/domain/repository/offers_repository.dart';
 import 'package:nubank_marketplace/features/offers/domain/usecases/get_offers.dart';
 import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
+import 'package:nubank_marketplace/features/user/data/datasources/user_local_data_source.dart';
 import 'package:nubank_marketplace/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:nubank_marketplace/features/user/data/repositories/user_repository_impl.dart';
 import 'package:nubank_marketplace/features/user/domain/repository/user_repository.dart';
@@ -29,20 +31,23 @@ Future<void> init() async {
 
 void initFeatures() {
   //!Repositories
-  sl.registerLazySingleton<UserRepository>(
-      () => UserRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
+      remoteDataSource: sl(), localDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<OffersRepository>(
       () => OffersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
   //!Blocs
   sl.registerLazySingleton(() => UserBloc(sl()));
   sl.registerLazySingleton(() => OffersBloc(sl()));
+  sl.registerLazySingleton(() => CartBloc());
 
   // Usercases
   sl.registerLazySingleton(() => GetUser(sl()));
   sl.registerLazySingleton(() => GetOffers(sl()));
 
   // Datasources
+  sl.registerLazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSourceImpl(sl()));
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(sl(), sl()));
   sl.registerLazySingleton<OffersRemoteDataSource>(

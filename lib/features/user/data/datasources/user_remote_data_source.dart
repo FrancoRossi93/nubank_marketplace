@@ -29,19 +29,19 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         "variables": null
       });
 
-      final response =
-          await client.post(Uri.parse(API_URL), body: query, headers: {
-        "Authorization":
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhd2Vzb21lY3VzdG9tZXJAZ21haWwuY29tIn0.cGT2KqtmT8KNIJhyww3T8fAzUsCD5_vxuHl5WbXtp8c",
-        "Content-Type": "application/json"
-      });
+      final response = await client.post(Uri.parse(API_URL),
+          body: query,
+          headers: {
+            "Authorization": "Bearer $token",
+            "Content-Type": "application/json"
+          });
       if (response.statusCode == 200) {
         final user =
             UserModel.fromJson(json.decode(response.body)['data']['viewer']);
         return user;
       }
     } catch (e) {
-      throw ServerException(message: e);
+      throw ServerException(message: 'Error en el servidor');
     }
   }
 }

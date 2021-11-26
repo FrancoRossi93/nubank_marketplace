@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nubank_marketplace/features/cart/bloc/cart_bloc.dart';
 import 'package:nubank_marketplace/features/offers/presentation/bloc/offers_bloc.dart';
 import 'package:nubank_marketplace/features/user/presentation/bloc/user_bloc.dart';
 import 'package:nubank_marketplace/router.dart';
@@ -23,13 +24,29 @@ class MyApp extends StatelessWidget {
         BlocProvider<UserBloc>(
             create: (context) => sl<UserBloc>()..add(GetUserEvent())),
         BlocProvider<OffersBloc>(
-            create: (context) => sl<OffersBloc>()..add(GetOffersEvent()))
+            create: (context) => sl<OffersBloc>()..add(GetOffersEvent())),
+        BlocProvider<CartBloc>(create: (context) => sl<CartBloc>())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+            primaryColor: const Color(0xFFa332b3),
+            primaryColorLight: const Color(0xFFd765e6),
+            primaryColorDark: const Color(0xFF710083),
+            appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF710083)),
+            buttonTheme: const ButtonThemeData(
+                buttonColor: Color(0xFF710083),
+                textTheme: ButtonTextTheme.normal),
+            textTheme: const TextTheme(
+                bodyText1:
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                headline4: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+                headline5: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                headline6:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.w400))),
         onGenerateRoute: NubankMarketplaceRouter.generateRoute,
       ),
     );

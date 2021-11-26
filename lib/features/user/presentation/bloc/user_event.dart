@@ -8,3 +8,9 @@ abstract class UserEvent extends Equatable {
 }
 
 class GetUserEvent extends UserEvent {}
+
+class UpdateUserBalanceEvent extends UserEvent {
+  final User user;
+  int totalPurchased;
+  UpdateUserBalanceEvent(this.user, this.totalPurchased);
+}

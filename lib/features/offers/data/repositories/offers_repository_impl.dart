@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
+import 'package:nubank_marketplace/core/exceptions.dart';
 import 'package:nubank_marketplace/core/failures.dart';
 
 import 'package:nubank_marketplace/core/network/network_info.dart';
@@ -21,8 +22,8 @@ class OffersRepositoryImpl implements OffersRepository {
         if (offers is List) {
           return Right(offers);
         }
-      } catch (e) {
-        return Left(ServerFailure(message: e));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
       }
     }
   }
