@@ -1,16 +1,26 @@
 # nubank_marketplace
 
-A new Flutter project.
+Project written in Dart and Flutter.
+NuBank MarketPlace for interview coding challenge.
 
-## Getting Started
+## Repository info
 
-This project is a starting point for a Flutter application.
+# Run project
+Just clone the project from my Github public repo (https://github.com/FrancoRossi93/nubank_marketplace) and Run it from terminal or from text editor ui. Branches master and develop are up to date. 
+For running the project you will need flutter 2 and it should run in all devices (android and iOS).
 
-A few resources to get you started if this is your first Flutter project:
+# Clean code, pattern and architecture
+This repository is organized in a clean way with BloC library and modules separeted in features.
+Each features has 3 roots folders (layers), domain, data and presentation.
+Domain folder will contain the bussiness logic (use cases) and entities (bussiness objects), its also the most inner layer folder of them and independent. 
+The data folder consists of a repository implementation and through data sources (remote and local) for getting the data from the api (remote).
+Presentation layer is where all the widgets and BloCs are. Separating widgets from their pages and BloCs keeps code clean.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Problem domain solving
+Fetching data from Graphql API was made through REST calls, i know there is a package in flutter to implement (https://pub.dev/packages/graphql_flutter), but i decided to do it with REST in http because it was more challgening and i wanted to keep the presentation layer organized and only with BloC statemanegment.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Tests
+All necessary unit tests has been implemented, their folders follow the same organization as in their counterparts. 
+
+# UI
+I made the ui as beautiful as I could in two days of work, I hope you like it.
