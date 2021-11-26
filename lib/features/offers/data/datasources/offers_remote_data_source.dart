@@ -41,9 +41,11 @@ class OffersRemoteDataSourceImpl implements OffersRemoteDataSource {
                 .map((e) => ProductOfferModel.fromJson(e))
                 .toList();
         return offers;
+      } else {
+        throw ServerException(message: 'Something went wrong');
       }
     } catch (e) {
-      throw ServerException(message: 'Error en el servidor');
+      throw ServerException(message: 'Server Error');
     }
   }
 }

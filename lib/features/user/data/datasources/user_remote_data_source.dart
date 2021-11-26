@@ -39,9 +39,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         final user =
             UserModel.fromJson(json.decode(response.body)['data']['viewer']);
         return user;
+      } else {
+        throw ServerException(message: 'Something went wrong');
       }
     } catch (e) {
-      throw ServerException(message: 'Error en el servidor');
+      throw ServerException(message: 'Server Error');
     }
   }
 }

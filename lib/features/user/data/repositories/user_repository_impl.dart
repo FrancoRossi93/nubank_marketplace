@@ -32,6 +32,9 @@ class UserRepositoryImpl implements UserRepository {
       } on ServerException catch (e) {
         return Left(ServerFailure(message: e.message));
       }
+    } else {
+      return Left(ConnectionFailure(
+          message: "The device is offline. Check your internet connection."));
     }
   }
 }
